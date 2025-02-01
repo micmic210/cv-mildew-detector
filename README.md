@@ -37,16 +37,28 @@ The client has outlined two primary business requirements for this project:
 ## Hypotheses and Validation
 
 ### Hypotheses
-1. **Visual Differences**: Healthy leaves have a uniform texture and color, while leaves with powdery mildew exhibit visible discoloration and fungal patterns.
-2. **Predictive Feasibility**: A supervised ML model can reliably classify images of cherry leaves into healthy or mildew-affected categories.
+1. **Visual Differences**: 
+  - **Healthy leaves** have a uniform texture and color**. 
+  - **Mildew-infected leaves** display **discoloration and fungal growth**.
+2. **Predictive Feasibility**
+  - A **supervised ML model** can classify cherry leaves into healthy or mildew-affected categories **with high accuracy**.
 
-### Validation Steps
-- **For Hypothesis 1**: Use data visualization techniques to display the average and variability images for healthy and mildew-affected leaves. Compare the differences visually.
-- **For Hypothesis 2**: Train a binary classification ML model and evaluate its performance using metrics such as accuracy and confusion matrix.
+### **Validation**
+- **Hypothesis 1**:  
+  - Use **mean and variability images** to analyze visual differences.  
+  - Generate **image montages** to compare healthy vs. infected leaves.  
+- **Hypothesis 2**:  
+  - Train a **CNN model** and a **Random Forest classifier**.  
+  - Evaluate models using **accuracy, precision, recall, and confusion matrix**.  
 
 ---
 
 ## The rationale to map the business requirements to the Data Visualisations and ML tasks
+
+| **Business Requirement**    | **Task**  |
+|----------------------------|----------------------------------|
+| **Visual Analysis**        | - Compute **mean and standard deviation images**.<br>- Compare **healthy vs. infected leaves visually**.<br>- Generate **image montages** to highlight differences. |
+| **Classification & Prediction** | - Train a **CNN model** with optimized hyperparameters.<br>- **Validate model performance** on test data.<br>- Deploy a **Streamlit dashboard** for real-time predictions. |
 
 ### **Business Requirement 1**: Visual Analysis
 - Display the mean and standard deviation images for healthy and mildew-affected leaves.
@@ -77,141 +89,198 @@ The training data is derived from the cherry leaves dataset, consisting of label
 
 ---
 
-## CRISP-DM Framework
+## **Project Workflow: CRISP-DM Framework**
 
-1. **Business Understanding**:
-   - **Problem**: Manual inspection of cherry leaves is inefficient and unscalable.
-   - **Goal**: Develop a scalable ML solution to automate leaf classification and provide actionable farm insights.
-
-2. **Data Understanding and Preparation**:
-   - **Dataset**: 4208 labeled images of healthy and mildew-affected cherry leaves.
-   - **Preprocessing**:
-     - Resize images to 50x50 pixels for consistency.
-     - Normalize pixel values and apply data augmentation (e.g., rotation, flipping) to improve model robustness.
-
-3. **Modeling**:
-   - Design and train a convolutional neural network (CNN) using TensorFlow/Keras.
-   - Optimize hyperparameters to enhance model accuracy and generalization.
-
-4. **Evaluation**:
-   - Assess the model using metrics such as precision, recall, F1-score, and accuracy.
-   - Focus on high recall to minimize false negatives in mildew detection.
-
-5. **Deployment**:
-   - Integrate the trained model into a Streamlit dashboard for real-time predictions.
-   - Ensure the dashboard is user-friendly and accessible across devices.
+1. **Business Understanding**  
+   - **Problem**: **Manual detection is inefficient and unscalable**.  
+   - **Goal**: Develop an **ML-based mildew detection system**.  
+2. **Data Understanding & Preparation**  
+   - Dataset: **4,208 labeled images**.  
+   - Processing: **Image cleaning, resizing, augmentation**.  
+3. **Modeling**  
+   - **Train CNN & Random Forest models**.  
+   - **Optimize hyperparameters** for best performance.  
+4. **Evaluation**  
+   - **Compare model performance** using precision, recall, and accuracy.  
+5. **Deployment**  
+   - **Deploy an interactive AI-powered Streamlit dashboard**.  
 
 ---
 
-## Dashboard Design
-### Page 1: **Quick Project Summary**
-- **Content**:
-  - Overview of powdery mildew and its impact on cherry crops.
-  - Description of the manual detection process and its inefficiencies.
-  - Project goals and how the solution addresses the client’s needs.
-
-### Page 2: **Leaf Visualizer**
-- **Business Requirement**: Address visual differentiation of healthy vs. mildew-affected leaves.
-- **Features**:
-  - Checkbox 1: Display mean and standard deviation images for both categories.
-  - Checkbox 2: Show differences between average healthy and mildew-affected leaves.
-  - Checkbox 3: Display an image montage of the dataset.
-
-### Page 3: **Mildew Detector**
-- **Business Requirement**: Predict leaf health status.
-- **Features**:
-  - Upload widget for cherry leaf images.
-  - Display predictions with associated probabilities.
-  - Generate a table summarizing image names and predictions.
-  - Download button for saving prediction results.
-
-### Page 4: **Project Hypotheses and Validation**
-- **Content**:
-  - List hypotheses and their validation steps.
-  - Include visualizations and results supporting each hypothesis.
-
-### Page 5: **ML Performance Metrics**
-- **Content**:
-  - Label frequencies for train, validation, and test datasets.
-  - Model training history (accuracy and loss curves).
-  - Model evaluation metrics (e.g., confusion matrix, precision, recall).
+## **Dashboard Design**
+The **Streamlit dashboard** provides an **interactive AI-powered tool** for visualizing cherry leaf data and predicting mildew infections. It is structured into five key pages.
 
 ---
 
-## User Stories
+### **Page 1: Quick Project Summary**
+- **Business Requirement**: Provide an overview of the project and its objectives.
+- **Content**:
+  - **Introduction to Powdery Mildew**:  
+    - Explanation of powdery mildew as a fungal disease.
+    - Its impact on cherry crops, including reduced yield and quality.
+  - **Current Detection Process & Its Limitations**:  
+    - Manual inspection takes **~30 minutes per tree**, which is slow and unscalable.
+    - Prone to **human error and inconsistency**.
+  - **Project Goals**:  
+    - Develop a **machine learning model** to automate mildew detection.
+    - Provide an **interactive dashboard** for real-time classification.
+  - **How the Solution Works**:  
+    - Users can **upload images of cherry leaves** for classification.
+    - Model predicts **Healthy** or **Infected** status.
+    - Dashboard provides **data insights and visual comparisons**.
 
-1. Intuitive Navigation
-   - **Priority**: Must-Have
-   - **User Story**:
-     As a client, I want an intuitive dashboard with clear navigation so that I can easily access data, predictions, and insights.
-   - **Acceptance Criteria**:
-     - A navigation bar is present and allows switching between all pages.
-     - All navigation links are clearly labeled and functional.
-     - The user can access any page in no more than two clicks.
+---
 
-2. Visual Differentiation
-   - **Priority**: Must-Have
-   - **User Story**:
-     As a client, I want to observe average and variability images of healthy and mildew-infected cherry leaves so that I can visually differentiate between the two categories.
-   - **Acceptance Criteria**:
-     - The dashboard displays average and variability images for healthy and infected leaves.
-     - The user can toggle between these visualizations using checkboxes or buttons.
-     - The visualizations are clear and labeled with appropriate captions.
+### **Page 2: Leaf Visualizer**
+- **Business Requirement**: Address the visual differentiation of healthy vs. mildew-affected leaves.
+- **Features**:
+  - **Checkbox 1**: Display **mean and standard deviation images** for both categories.  
+    - Users can observe the **average appearance** of healthy and infected leaves.  
+  - **Checkbox 2**: Show **differences between the average images** of healthy vs. infected leaves.  
+    - A **pixel-wise difference image** highlights **distinctive mildew patterns**.  
+  - **Checkbox 3**: Display an **image montage** of the dataset.  
+    - Users can view **random samples** of both **healthy** and **infected** leaves.  
+    - Helps confirm **dataset quality and diversity**.
 
-3. Image Montage
-   - **Priority**: Nice-to-Have
-   - **User Story**:
-     As a client, I want to view montages of healthy and infected leaves so that I can compare them more easily.
-   - **Acceptance Criteria**:
-     - The user can select “Healthy” or “Infected” leaves to create a montage.
-     - The montage displays at least 9 images per category in a grid format.
-     - There is a button to dynamically generate a new montage.
+---
 
-4. Real-Time Predictions
-   - **Priority**: Must-Have
-   - **User Story**:
-     As a client, I want to upload images of cherry leaves and receive predictions about their health status (healthy/infected) in real-time.
-   - **Acceptance Criteria**:
-     - A file uploader is available and supports single and multiple image uploads.
-     - The system predicts the health status of each uploaded image with at least 90% accuracy.
-     - Predictions are displayed on the dashboard with confidence scores.
+### **Page 3: Mildew Detector**
+- **Business Requirement**: Predict the health status of a cherry leaf based on an uploaded image.
+- **Features**:
+  - **Upload Widget**:  
+    - Users can **upload single or multiple images** of cherry leaves.
+    - Accepted formats: `.jpg`, `.png`, `.jpeg`.
+  - **Real-Time Predictions**:  
+    - Model classifies each image as **Healthy** or **Infected**.
+    - Displays **confidence score (%)** for each prediction.
+  - **Prediction Results Table**:  
+    - Shows **file name, predicted class, and confidence score**.
+    - Allows **sorting and filtering** results.
+  - **Download Button**:  
+    - Users can download the **prediction results as a CSV file** for future reference.
 
-5. Infection Rate Summary
-   - **Priority**: Nice-to-Have
-   - **User Story**:
-     As a client, I want to see a summary of the infection rate (percentage of healthy vs. infected leaves) based on the uploaded images so that I can quickly understand the overall situation.
-   - **Acceptance Criteria**:
-     - A pie chart or bar chart displays the percentage of healthy vs. infected leaves.
-     - The chart updates dynamically based on the uploaded images.
-     - The chart is labeled clearly and easy to interpret.
+---
 
-6. Hypotheses and Validation
-   - **Priority**: Must-Have
-   - **User Story**:
-     As a stakeholder, I want to understand the hypotheses tested and their validation process so that I can trust the results of the project.
-   - **Acceptance Criteria**:
-     - A dedicated page presents the project’s hypotheses and explains them simply.
-     - Validation steps are described clearly, including visuals and results.
-     - The page includes insights on how the visual differentiation supports the ML model’s development.
+### **Page 4: Project Hypotheses and Validation**
+- **Business Requirement**: Demonstrate how hypotheses were tested and validated.
+- **Content**:
+  - **Hypothesis 1: Visual Differences Exist**  
+    - Display **mean and standard deviation images**.
+    - Provide **side-by-side comparisons** of healthy vs. infected leaves.
+  - **Hypothesis 2: AI Can Predict Mildew Infections**  
+    - Show **model performance metrics** (e.g., accuracy, precision, recall).
+    - Provide **example predictions** with confidence scores.
+  - **Supporting Visualizations**:  
+    - Side-by-side comparisons of **healthy vs. infected** leaves.
+    - Sample **classification results** from the model.
+    - Explanation of **data preprocessing and augmentation techniques**.
 
-7. Model Performance Metrics
-   - **Priority**: Must-Have
-   - **User Story**:
-     As a stakeholder, I want to see detailed performance metrics so that I can evaluate how reliable the model is.
-   - **Acceptance Criteria**:
-     - The dashboard displays metrics such as precision, recall, F1-score, and confusion matrix.
-     - The metrics are easy to understand, with clear labels and explanations.
-     - The dashboard includes an overall accuracy metric and explains its significance.
+---
 
-8. Scalability and Future Applications
-   - **Priority**: Nice-to-Have
-   - **User Story**:
-     As a stakeholder, I want to see potential applications of this solution for other crops and diseases so that I can plan for scalability.
-   - **Acceptance Criteria**:
-     - A section in the README discusses opportunities for applying the model to other crops or pests.
-     - The section outlines potential integrations with IoT devices or drone-based image capture.
-     - Lessons learned from this project that support scalability are highlighted.
+### **Page 5: ML Performance Metrics**
+- **Business Requirement**: Provide insights into the model’s accuracy and effectiveness.
+- **Content**:
+  - **Dataset Summary**:  
+    - **Label frequencies** in train, validation, and test sets.
+    - **Bar charts** showing class distribution across datasets.
+  - **Training History**:  
+    - Line graphs of **training vs. validation accuracy** over epochs.
+    - **Loss curves** to track model convergence.
+  - **Evaluation Metrics**:  
+    - **Confusion Matrix** visualization.  
+    - **Classification Report** (Precision, Recall, F1-score).  
+    - **Model comparison table**: CNN vs. Random Forest.  
+  - **Model Performance Takeaways**:  
+    - Key observations on **misclassified samples**.
+    - Strengths and limitations of the chosen model.  
 
+---
+
+
+## **User Stories**
+The **Streamlit dashboard** should provide an interactive and user-friendly experience for visualizing cherry leaf conditions, making predictions, and understanding model performance.
+
+### 1. **Intuitive Navigation**
+   - **Priority**: Must-Have  
+   - **User Story**:  
+     As a user, I want an intuitive dashboard with clear navigation so that I can easily access all features and insights.  
+   - **Acceptance Criteria**:  
+     - A **navigation bar** is present to allow switching between all pages.  
+     - All navigation links are **clearly labeled and functional**.  
+     - The user can reach any page in **two or fewer clicks**.  
+     - The UI layout is **consistent and responsive** across devices.  
+
+### 2. **Visual Differentiation**  
+   - **Priority**: Must-Have  
+   - **User Story**:  
+     As a user, I want to visually compare healthy and mildew-affected leaves so that I can understand the key differences.  
+   - **Acceptance Criteria**:  
+     - **Checkbox 1**: Display **mean and variability images** for both classes.  
+     - **Checkbox 2**: Show **side-by-side comparisons** of average healthy vs. mildew-affected leaves.  
+     - **Checkbox 3**: Display an **image montage** showing multiple examples from each class.  
+     - All visualizations are **clearly labeled** and easy to interpret.  
+
+### 3. **Image Montage**  
+   - **Priority**: Nice-to-Have  
+   - **User Story**:  
+     As a user, I want to view multiple examples of healthy and infected leaves in a montage so that I can analyze visual patterns.  
+   - **Acceptance Criteria**:  
+     - A **dropdown menu** allows users to select "Healthy" or "Infected" leaves.  
+     - The montage displays at least **9 images per category** in a **grid format**.  
+     - Users can **regenerate** the montage with new random images.  
+
+### 4. **Real-Time Predictions**  
+   - **Priority**: Must-Have  
+   - **User Story**:  
+     As a user, I want to upload images of cherry leaves and receive predictions about their health status so that I can detect mildew quickly.  
+   - **Acceptance Criteria**:  
+     - A **file uploader** allows users to select **single or multiple images**.  
+     - The model predicts whether a leaf is **Healthy** or **Infected** with at least **90% accuracy**.  
+     - Results include:  
+       - **Classification label** (Healthy/Infected).  
+       - **Confidence score** for each prediction.  
+     - Users can download a **summary report** with image names and predictions.  
+
+### 5. **Infection Rate Summary**  
+   - **Priority**: Nice-to-Have  
+   - **User Story**:  
+     As a user, I want to see a summary of the infection rate (percentage of healthy vs. infected leaves) based on my uploaded images so that I can quickly assess the situation.  
+   - **Acceptance Criteria**:  
+     - A **dynamic pie chart** displays the proportion of healthy vs. infected leaves.  
+     - The chart **updates automatically** when new images are uploaded.  
+     - Infection rates are **displayed as percentages**.  
+     - Users can download a **summary table** of infection rates.  
+
+### 6. **Hypotheses and Validation**  
+   - **Priority**: Must-Have  
+   - **User Story**:  
+     As a stakeholder, I want to understand the hypotheses tested and their validation process so that I can trust the project results.  
+   - **Acceptance Criteria**:  
+     - A dedicated **Hypotheses & Validation** page explains the tested hypotheses.  
+     - Visualizations support **hypothesis validation** with comparisons of healthy vs. infected leaves.  
+     - Key insights are clearly summarized.  
+
+### 7. **Model Performance Metrics**  
+   - **Priority**: Must-Have  
+   - **User Story**:  
+     As a stakeholder, I want to see detailed performance metrics so that I can evaluate how reliable the model is.  
+   - **Acceptance Criteria**:  
+     - The dashboard displays:  
+       - **Confusion matrix** with actual vs. predicted labels.  
+       - **Classification report** (precision, recall, F1-score).  
+       - **Training history** (accuracy and loss curves).  
+     - All metrics are **clearly explained** and easy to interpret.  
+
+### 8. **Scalability and Future Applications**  
+   - **Priority**: Nice-to-Have  
+   - **User Story**:  
+     As a stakeholder, I want to explore how this project could be expanded to detect other plant diseases so that I can assess its scalability.  
+   - **Acceptance Criteria**:  
+     - A **"Future Applications"** section outlines possible expansions (e.g., detecting diseases in other crops).  
+     - The section discusses **model retraining** with new datasets.  
+     - Potential **IoT and drone-based integrations** are briefly outlined.  
+
+---
 
 ## Unfixed Bugs
 
